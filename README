@@ -1,0 +1,47 @@
+corod is a framework for generators.
+
+Using corods is simple, as they can be chained into the pipeline, and easly iterated:
+
+void main(string[] args) {
+	auto rr = new Randoms!(uint)(123);
+	auto ru = new RandomsUniform!(float)(rr);
+
+	foreach (x; new Foreach!(float, ru, 1000)()) {
+		writefln("%g", x);
+	}
+}
+
+
+Implemeneing corods is also simple:
+
+final class SimpleSomething : FiberGenerator!(int) {
+public:
+	///
+	this(int What_, int Times_) {
+		What = What_;
+		Times = Times_;
+	}
+
+	int What, Times;
+
+protected:
+	override void iter() {
+		for (int i = 0; i < Times; i++) {
+			yield(What);
+		}
+	}
+}
+
+
+
+Generators in corod are implemented using Fiber's,
+and are like cooperative Threads.
+
+
+Framework contains few usefull classes:
+   - functional style pipelines primitives
+       - range, array, filter, map, foldl, limit, foreach, concat, every, repeat, constatn
+       - concurant generators and foreach, interleave
+   - random number generators
+   - time series generators
+   - some statistical modules, to analyse time series
