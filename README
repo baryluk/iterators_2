@@ -45,3 +45,5 @@ Framework contains few usefull classes:
    - random number generators
    - time series generators
    - some statistical modules, to analyse time series
+   - series and sums generators, and convergance acceleration functions
+   - example for recursive generator
